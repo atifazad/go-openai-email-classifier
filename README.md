@@ -25,11 +25,58 @@ This project is an Email Classifier built using Go, leveraging the go-gpt3 class
    go run cmd/main.go
    ```
 
-## Usage
+## API Endpoints
 
-- The API can be accessed at `http://localhost:8080/api/classify`.
-- Send a POST request with the email content in JSON format to classify the email.
+### Classify an Email
 
-## License
+- **URL**: `/classify`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "subject": "Test Email",
+    "content": "This is a test email content."
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "classification": "not spam"
+  }
+  ```
 
-This project is licensed under the MIT License.
+### Retrieve All Classifications
+
+- **URL**: `/classifications`
+- **Method**: `GET`
+- **Response**:
+  ```json
+  [
+    {
+      "id": 1,
+      "subject": "Test Email",
+      "content": "This is a test email content.",
+      "classification": "not spam"
+    }
+  ]
+  ```
+
+### Retrieve a Classification by ID
+
+- **URL**: `/classification?id=1`
+- **Method**: `GET`
+- **Response**:
+  ```json
+  {
+    "id": 1,
+    "subject": "Test Email",
+    "content": "This is a test email content.",
+    "classification": "not spam"
+  }
+  ```
+
+### Delete a Classification by ID
+
+- **URL**: `/delete-classification?id=1`
+- **Method**: `DELETE`
+- **Response**: `204 No Content`
